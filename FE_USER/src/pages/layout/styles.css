@@ -1,0 +1,76 @@
+
+.scroll-to-top-fade {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  animation: scrollUp 0.3s ease-in-out;
+}
+
+.scroll-to-top-fade.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes scrollUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/*---------------------- Sroll to Top -------------------*/
+.back-to-top {
+  position: fixed;
+  right: 10px;
+  bottom: 150px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 99;
+ }
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: opacity .3s ease;
+  -moz-transition: opacity .3s ease;
+  transition: opacity .3s ease; 
+}
+
+.back-to-top .btt-label-back {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 40px;
+  -webkit-transform: rotate(-90deg) translateX(50%) translateY(50%);
+  -moz-transform: rotate(-90deg) translateX(50%) translateY(50%);
+  transform: rotate(-90deg) translateX(50%) translateY(50%);
+}
+
+.back-to-top .btt-icon-back {
+  position: absolute;
+  bottom: 275%;
+  left: 76%;
+  -webkit-transform: translateX(-50%) translateY(0);
+  -moz-transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0);
+  -webkit-transition: -webkit-transform 0.45s cubic-bezier(0, 0.95, 0.77, 1);
+  transition: transform 0.45s cubic-bezier(0, 0.95, 0.77, 1);
+  will-change: transform; 
+}
+.btt-back span{
+  color:blue;
+  font-size: 14px;
+  font-weight: 600;
+}
