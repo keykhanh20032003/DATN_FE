@@ -1,8 +1,0 @@
-@media (min-width: 992px){
-  .sidebar-main{
-    display: none;
-  }
-}
-.menuList-main li a{
-  cursor: pointer;
-}
