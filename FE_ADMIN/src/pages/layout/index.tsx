@@ -9,6 +9,7 @@ import ThemeAction from '~/redux/actions/ThemeAction';
 import { RootState } from '~/redux/reducers';
 
 import Product from '../products';
+import Category from '../category';
 import SuspenseContent from './suspenseContent';
 
 import './styles.css';
@@ -58,6 +59,7 @@ const Layout = () => {
           <Suspense fallback={<SuspenseContent />}>
             <Routes>
               <Route path={path.products} element={<Product />} />
+              <Route path={path.categories} element={<Category />} />
             </Routes>
           </Suspense>
         </div>
