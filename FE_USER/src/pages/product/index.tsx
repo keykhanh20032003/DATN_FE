@@ -11,6 +11,7 @@ import noUiSlider from 'nouislider';
 import { formatPrice } from '~/constants/utils';
 import 'nouislider/dist/nouislider.css';
 import Pagination from '~/components/paginationItems';
+import LoadingPage from '~/components/loadingPage';
 import SpinLoading from '~/components/spinloading';
 import categoryApi from '~/apis/category.apis';
 import { Category } from '~/types/category.type';
@@ -145,7 +146,26 @@ const ProductView = () => {
       });
     }
   }, [listProduct]);
-
+  const handleChooseSize = (selectedSize) => {
+    // Kiểm tra xem selectedSize đã được chọn trước đó hay chưa
+    if (valueSize.includes(selectedSize)) {
+      // Nếu đã chọn rồi, loại bỏ khỏi mảng valueSize
+      setValueSize(valueSize.filter((size) => size !== selectedSize));
+    } else {
+      // Nếu chưa chọn, thêm vào mảng valueSize
+      setValueSize([...valueSize, selectedSize]);
+    }
+  };
+  const handleChooseColor = (selectedColor) => {
+    // Kiểm tra xem selectedColor đã được chọn trước đó hay chưa
+    if (valueColor.includes(selectedColor)) {
+      // Nếu đã chọn rồi, loại bỏ khỏi mảng valueColor
+      setValueColor(valueColor.filter((color) => color !== selectedColor));
+    } else {
+      // Nếu chưa chọn, thêm vào mảng valueColor
+      setValueColor([...valueColor, selectedColor]);
+    }
+  };
   const handlePageClick = (page) => {
     setPage(page);
   };
@@ -305,6 +325,7 @@ const ProductView = () => {
                                         type="checkbox"
                                         id={`data-color-${i}`}
                                         name="color-filter"
+                                        onChange={() => handleChooseColor(item.value)}
                                         checked={valueColor.includes(item.value)}
                                       />
                                       <label htmlFor={`data-color-${i}`}>{item?.value}</label>
@@ -336,6 +357,7 @@ const ProductView = () => {
                                         type="checkbox"
                                         id={`data-size-${i}`}
                                         name="size-filter"
+                                        onChange={() => handleChooseSize(item.value)}
                                         checked={valueSize.includes(item.value)}
                                       />
                                       <label htmlFor={`data-size-${i}`}>{item?.value}</label>
