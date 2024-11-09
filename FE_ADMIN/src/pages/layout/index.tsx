@@ -6,6 +6,7 @@ import Sidebar from '~/components/sidebar';
 import TopNav from '~/components/topnav';
 import path from '~/constants/path';
 import ThemeAction from '~/redux/actions/ThemeAction';
+import Article from '../article';
 import { RootState } from '~/redux/reducers';
 
 import Product from '../products';
@@ -60,6 +61,7 @@ const Layout = () => {
             <Routes>
               <Route path={path.products} element={<Product />} />
               <Route path={path.categories} element={<Category />} />
+              <Route path={path.article} element={<Article />} />
             </Routes>
           </Suspense>
         </div>
