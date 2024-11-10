@@ -14,6 +14,8 @@ import Category from '../category';
 import SuspenseContent from './suspenseContent';
 
 import './styles.css';
+import AddArticle from '../article/addArticle';
+import EditArticle from '../article/editArticle';
 
 const Layout = () => {
   const themeReducer = useSelector((state: RootState) => state.ThemeReducer);
@@ -62,6 +64,8 @@ const Layout = () => {
               <Route path={path.products} element={<Product />} />
               <Route path={path.categories} element={<Category />} />
               <Route path={path.article} element={<Article />} />
+              <Route path={path.addArticle} element={<AddArticle />} />
+              <Route path={path.editArticle} element={<EditArticle />} />
             </Routes>
           </Suspense>
         </div>
