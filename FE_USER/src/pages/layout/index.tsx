@@ -7,6 +7,7 @@ import path from '~/constants/path';
 import './styles.css';
 import Home from '../home';
 import ProductView from '../product';
+import DetailProduct from '../detailProduct';
 
 
 
@@ -59,6 +60,7 @@ const Layout = () => {
         <Routes>
           <Route path={path.home} element={<Home />} />
           <Route path={path.product} element={<ProductView />} />
+          <Route path={path.product} element={<DetailProduct />} />
 
         </Routes>
       </div>
