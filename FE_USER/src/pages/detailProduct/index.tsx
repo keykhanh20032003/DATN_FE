@@ -12,8 +12,11 @@ import { User } from '~/types/user.type';
 import { RootState } from '~/redux/reducers';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Color, Product, ProductImages, Size } from '~/types/product.type';
+import cartApi from '~/apis/cart.apis';
+import CartAction from '~/redux/actions/cartAction';
 import { toast } from 'react-toastify';
 import productApi from '~/apis/product.apis';
+import path from '~/constants/path';
 import { API_URL_IMAGE, formatPrice } from '~/constants/utils';
 import saleApi from '~/apis/sale.apis';
 import { Sale } from '~/types/sale.type';
@@ -177,6 +180,43 @@ const DetailProduct = () => {
       setSelectedColor(product.colors[0].value);
     }
   }, [product]);
+  const addToCart = async () => {
+    if (user) {
+      try {
+        const data = {
+          quantity: quantity,
+          sellPrice: product?.salePrice,
+          productName: product?.name,
+          valueColor: selectedColor,
+          valueSize: selectedSize,
+        };
+        const res = await cartApi.addToCart(user.id, data);
+        if (res.data.status) {
+          dispatch(CartAction.addToCart(res.data.data.items));
+          toast.success(`Thêm vào giỏ hàng thành công`, {
+            position: 'top-right',
+            pauseOnHover: false,
+            theme: 'dark',
+          });
+        } else {
+          toast.error(`${res.data.data}`, {
+            position: 'top-right',
+            pauseOnHover: false,
+            theme: 'dark',
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      navigate(path.login);
+      toast.error(`Vui lòng đăng nhập để mua hàng`, {
+        position: 'top-right',
+        pauseOnHover: false,
+        theme: 'dark',
+      });
+    }
+  };
   const getSale = async (id: number) => {
     try {
       const res = await saleApi.getSale(id);
@@ -193,6 +233,10 @@ const DetailProduct = () => {
       getSale(product?.sale);
     }
   }, [product]);
+  const buyNow = async () => {
+    await addToCart();
+    navigate(path.cart);
+  };
   const getSaleRealated = async (id: number) => {
     try {
       const res = await saleApi.getSale(id);
@@ -470,6 +514,7 @@ const DetailProduct = () => {
                                     name="add-to-cart"
                                     className="button btn-addtocart"
                                     id="add-to-cart"
+                                    onClick={addToCart}
                                   >
                                     Thêm vào giỏ
                                   </button>
@@ -478,6 +523,7 @@ const DetailProduct = () => {
                                     className="button btnred btn-buynow"
                                     name="buy-now"
                                     id="buy-now"
+                                    onClick={buyNow}
                                   >
                                     <span className="add-to-cart--text">Mua ngay</span>
                                   </button>
@@ -1102,6 +1148,7 @@ const DetailProduct = () => {
                     name="add-to-cart"
                     className="btn-buy-sticky"
                     id="add-to-cart-sticky"
+                    onClick={addToCart}
                   >
                     <span className="add-to-cart--text">Thêm vào giỏ</span>
                   </button>

@@ -1,20 +1,25 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { API_URL_IMAGE, formatPrice } from '~/constants/utils';
 import './styles.css';
 import productApi from '~/apis/product.apis';
 import { Color, Product, ProductImages, Size } from '~/types/product.type';
 import { toast } from 'react-toastify';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import 'swiper/css/free-mode';
 
+import { Pagination, Navigation, Thumbs, FreeMode } from 'swiper/modules';
+import cartApi from '~/apis/cart.apis';
 import { User } from '~/types/user.type';
 import { RootState } from '~/redux/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import path from '~/constants/path';
+import Types from '~/redux/types';
+import CartAction from '~/redux/actions/cartAction';
 
 interface IIProduct {
   id: number;
@@ -28,20 +33,24 @@ interface IIProduct {
 }
 
 const ItemProduct = (props: IIProduct) => {
+  const user: User = useSelector((state: RootState) => state.AuthReducer.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
+  const handleThumbsSwiper = (swiper) => {
+    setThumbsSwiper(swiper);
+  };
   const [isSale, setIsSale] = React.useState(true);
   const [isOpen, setIsOpen] = React.useState(false);
   const [product, setProduct] = React.useState<Product>();
   const [colors, setColors] = React.useState<Color[]>([]);
   const [sizes, setSizes] = React.useState<Size[]>([]);
-  const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
+  const [selectedColorI, setSelectedColorI] = React.useState(0);
   const [selectedColor, setSelectedColor] = React.useState('');
   const [selectedSizeI, setSelectedSizeI] = React.useState(0);
   const [selectedSize, setSelectedSize] = React.useState('');
   const [quantity, setQuantity] = React.useState(1);
-  const [selectedColorI, setSelectedColorI] = React.useState(0);
   const [productImage, setProductImage] = React.useState<ProductImages[]>([]);
-
   const handleMinusClick = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
@@ -63,7 +72,25 @@ const ItemProduct = (props: IIProduct) => {
       setSizes(filteredSizes);
     }
   }, [selectedColor, colors]);
-
+  const handleColorChoose = (i) => {
+    setSelectedColorI(i);
+    setSelectedColor(product?.colors[i]?.value || '');
+  };
+  // React.useEffect(() => {
+  //   if (isOpen === true) {
+  //     setSelectedColor(product?.colors[0]?.value || '');
+  //     console.log(allSizes[0]?.value);
+  //     setSelectedSize(allSizes[0]?.value || '');
+  //   }
+  // }, [isOpen]);
+  const handleSizeChoose = (i) => {
+    if (sizes[i]?.total === 0) {
+      // Nếu size đã hết hàng, không thực hiện gì cả
+      return;
+    }
+    setSelectedSizeI(i);
+    setSelectedSize(sizes[i]?.value);
+  };
   React.useEffect(() => {
     if (sizes.length > 0 && isOpen) {
       if (sizes[0]?.total === 0) {
@@ -82,7 +109,6 @@ const ItemProduct = (props: IIProduct) => {
       setIsSale(false);
     }
   }, []);
-
   const openModal = () => {
     setIsOpen(true);
     getProduct();
@@ -90,7 +116,6 @@ const ItemProduct = (props: IIProduct) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-
   const getProduct = async () => {
     try {
       const res = await productApi.getProduct(props.id);
@@ -109,25 +134,6 @@ const ItemProduct = (props: IIProduct) => {
       console.error(error);
     }
   };
-
-  const handleSizeChoose = (i) => {
-    if (sizes[i]?.total === 0) {
-      // Nếu size đã hết hàng, không thực hiện gì cả
-      return;
-    }
-    setSelectedSizeI(i);
-    setSelectedSize(sizes[i]?.value);
-  };
-
-  const handleColorChoose = (i) => {
-    setSelectedColorI(i);
-    setSelectedColor(product?.colors[i]?.value || '');
-  };
-
-  const handleThumbsSwiper = (swiper) => {
-    setThumbsSwiper(swiper);
-  };
-
   const getColor = async () => {
     try {
       const res = await productApi.getColor(product?.id);
@@ -151,6 +157,45 @@ const ItemProduct = (props: IIProduct) => {
       setSelectedColor(product.colors[0].value);
     }
   }, [product]);
+
+  const addToCart = async () => {
+    if (user) {
+      try {
+        const data = {
+          quantity: quantity,
+          sellPrice: props.salePrice,
+          productName: product?.name,
+          valueColor: selectedColor,
+          valueSize: selectedSize,
+        };
+        const res = await cartApi.addToCart(user.id, data);
+        if (res.data.status) {
+          dispatch(CartAction.addToCart(res.data.data.items));
+          setIsOpen(false);
+          toast.success(`Thêm vào giỏ hàng thành công`, {
+            position: 'top-right',
+            pauseOnHover: false,
+            theme: 'dark',
+          });
+        } else {
+          toast.error(`${res.data.data}`, {
+            position: 'top-right',
+            pauseOnHover: false,
+            theme: 'dark',
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      navigate(path.login);
+      toast.error(`Vui lòng đăng nhập để mua hàng`, {
+        position: 'top-right',
+        pauseOnHover: false,
+        theme: 'dark',
+      });
+    }
+  };
   return (
     <>
       <div className={`product-loop ${props.slide ? 'product-loop-slide' : 'col-lg-cus5 col-lg-3 col-md-6 col-6'}`}>
@@ -193,6 +238,7 @@ const ItemProduct = (props: IIProduct) => {
                   <div className="actions-primary">
                     <button
                       className={`button btn-small btn-proloop-cart add-to-cart btn-addcart-view`}
+                      onClick={openModal}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 22 22">
                         <path d="M15.95 6H19.7V17.875C19.7 18.7344 19.3875 19.4635 18.7625 20.0625C18.1635 20.6875 17.4344 21 16.575 21H5.325C4.46563 21 3.72344 20.6875 3.09844 20.0625C2.49948 19.4635 2.2 18.7344 2.2 17.875V6H5.95C5.95 4.61979 6.43177 3.44792 7.39531 2.48438C8.3849 1.49479 9.56979 1 10.95 1C12.3302 1 13.5021 1.49479 14.4656 2.48438C15.4552 3.44792 15.95 4.61979 15.95 6ZM13.1375 3.8125C12.5385 3.1875 11.8094 2.875 10.95 2.875C10.0906 2.875 9.34844 3.1875 8.72344 3.8125C8.12448 4.41146 7.825 5.14062 7.825 6H14.075C14.075 5.14062 13.7625 4.41146 13.1375 3.8125ZM17.825 17.875V7.875H15.95V9.4375C15.95 9.69792 15.8589 9.91927 15.6766 10.1016C15.4943 10.2839 15.2729 10.375 15.0125 10.375C14.7521 10.375 14.5307 10.2839 14.3484 10.1016C14.1661 9.91927 14.075 9.69792 14.075 9.4375V7.875H7.825V9.4375C7.825 9.69792 7.73385 9.91927 7.55156 10.1016C7.36927 10.2839 7.14792 10.375 6.8875 10.375C6.62708 10.375 6.40573 10.2839 6.22344 10.1016C6.04115 9.91927 5.95 9.69792 5.95 9.4375V7.875H4.075V17.875C4.075 18.2135 4.19219 18.5 4.42656 18.7344C4.68698 18.9948 4.98646 19.125 5.325 19.125H16.575C16.9135 19.125 17.2 18.9948 17.4344 18.7344C17.6948 18.5 17.825 18.2135 17.825 17.875Z" />
@@ -205,7 +251,7 @@ const ItemProduct = (props: IIProduct) => {
                   </div>
                 </div>
                 <div className="proloop-actions__quickview">
-                  <button className="icon-quickview tooltip-cs " title="Xem nhanh" >
+                  <button className="icon-quickview tooltip-cs " title="Xem nhanh" onClick={openModal}>
                     <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 577.029 577.029">
                       <g>
                         <g>
@@ -240,7 +286,7 @@ const ItemProduct = (props: IIProduct) => {
                 {isSale ? `${formatPrice(props.salePrice)}` : `${formatPrice(props.price)}`}
               </span>
               {isSale && <span className="price-del">{formatPrice(props.price)}</span>}
-              <span className="addtocart-mb d-sm-block d-lg-none">
+              <span className="addtocart-mb d-sm-block d-lg-none" onClick={openModal}>
                 <a className="icon-addtocart">
                   <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 22 22">
                     <path d="M15.95 6H19.7V17.875C19.7 18.7344 19.3875 19.4635 18.7625 20.0625C18.1635 20.6875 17.4344 21 16.575 21H5.325C4.46563 21 3.72344 20.6875 3.09844 20.0625C2.49948 19.4635 2.2 18.7344 2.2 17.875V6H5.95C5.95 4.61979 6.43177 3.44792 7.39531 2.48438C8.3849 1.49479 9.56979 1 10.95 1C12.3302 1 13.5021 1.49479 14.4656 2.48438C15.4552 3.44792 15.95 4.61979 15.95 6ZM13.1375 3.8125C12.5385 3.1875 11.8094 2.875 10.95 2.875C10.0906 2.875 9.34844 3.1875 8.72344 3.8125C8.12448 4.41146 7.825 5.14062 7.825 6H14.075C14.075 5.14062 13.7625 4.41146 13.1375 3.8125ZM17.825 17.875V7.875H15.95V9.4375C15.95 9.69792 15.8589 9.91927 15.6766 10.1016C15.4943 10.2839 15.2729 10.375 15.0125 10.375C14.7521 10.375 14.5307 10.2839 14.3484 10.1016C14.1661 9.91927 14.075 9.69792 14.075 9.4375V7.875H7.825V9.4375C7.825 9.69792 7.73385 9.91927 7.55156 10.1016C7.36927 10.2839 7.14792 10.375 6.8875 10.375C6.62708 10.375 6.40573 10.2839 6.22344 10.1016C6.04115 9.91927 5.95 9.69792 5.95 9.4375V7.875H4.075V17.875C4.075 18.2135 4.19219 18.5 4.42656 18.7344C4.68698 18.9948 4.98646 19.125 5.325 19.125H16.575C16.9135 19.125 17.2 18.9948 17.4344 18.7344C17.6948 18.5 17.825 18.2135 17.825 17.875Z" />
@@ -251,7 +297,6 @@ const ItemProduct = (props: IIProduct) => {
           </div>
         </div>
       </div>
-
       {isOpen && (
         <div id="modal-quickview" className="noscroll-bar modal fade modal-quickview show" style={{ display: 'block' }}>
           <div className="modal-dialog modal-dialog-centered">
@@ -461,6 +506,7 @@ const ItemProduct = (props: IIProduct) => {
                               name="add-to-cart"
                               className="button btnred btn-addtocart-qv "
                               id="add-to-cart-qv"
+                              onClick={addToCart}
                             >
                               <span className="add-to-cart--text">Thêm vào giỏ </span>
                             </button>
@@ -650,7 +696,6 @@ const ItemProduct = (props: IIProduct) => {
           </div>
         </div>
       )}
-
     </>
   );
 };
