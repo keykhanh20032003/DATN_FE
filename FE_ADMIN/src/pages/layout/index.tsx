@@ -16,6 +16,8 @@ import SuspenseContent from './suspenseContent';
 import './styles.css';
 import AddArticle from '../article/addArticle';
 import EditArticle from '../article/editArticle';
+import Sale from '../sale';
+import DetailSale from '../sale/detailSale';
 
 const Layout = () => {
   const themeReducer = useSelector((state: RootState) => state.ThemeReducer);
@@ -66,6 +68,8 @@ const Layout = () => {
               <Route path={path.article} element={<Article />} />
               <Route path={path.addArticle} element={<AddArticle />} />
               <Route path={path.editArticle} element={<EditArticle />} />
+              <Route path={path.sale} element={<Sale />} />
+              <Route path={path.detailSale} element={<DetailSale />} />
             </Routes>
           </Suspense>
         </div>
