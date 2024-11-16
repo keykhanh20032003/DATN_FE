@@ -8,6 +8,7 @@ import './styles.css';
 import Home from '../home';
 import ProductView from '../product';
 import DetailProduct from '../detailProduct';
+import Cart from '../cart';
 
 
 
@@ -61,6 +62,7 @@ const Layout = () => {
           <Route path={path.home} element={<Home />} />
           <Route path={path.product} element={<ProductView />} />
           <Route path={path.product} element={<DetailProduct />} />
+          <Route path={path.cart} element={<Cart />} />
 
         </Routes>
       </div>
