@@ -1,0 +1,96 @@
+.cancel-order{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  border-radius: 10px;
+  padding: 0 5px;
+  cursor: pointer;
+}
+.cancel-order span {
+  color: white;
+}
+.da-xac-nhan{
+  color: blue;
+}
+.dang-giao{
+  color: greenyellow;
+}
+.da-giao{
+  color: chartreuse
+}
+.da-huy{
+  color: red;
+}
+.bung-hang{
+  color: red;
+}
+.modal-cancel-order{
+  align-items: center;
+  flex-direction: column;
+  justify-items: center;
+}
+.modal-cancel-order .action {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+.modal-cancel-order .action .huy {
+  width: 30%;
+  height: 40px;
+  background-color: blue;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-cancel-order .action .xac-nhan {
+  width: 30%;
+  height: 40px;
+  display: flex;
+  background-color: red;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.modal-cancel-order .action span {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  padding: 0 5px;
+}
+@media (max-width: 1300px) and (min-width: 992px) {
+  .cancel-order {
+    border-radius: 6px; 
+  } 
+}
+
+@media (max-width: 992px) and (min-width: 376px) {
+  .cancel-order {
+    border-radius: 4px;
+  } 
+  .modal-cancel-order .action .huy{
+    height: 30px;
+  }
+  .modal-cancel-order .action .xac-nhan {
+    height: 30px;
+    border-radius: 12px;
+  }
+}
+@media (max-width: 376px) and (min-width: 0px) {
+  .cancel-order {
+    border-radius: 4px;
+  } 
+  .modal-cancel-order .action .huy{
+    height: 20px;
+  }
+  .modal-cancel-order .action .xac-nhan {
+    height: 20px;
+    border-radius: 10px;
+  }
+  .modal-cancel-order .action span {
+    font-size: 14px;
+  }
+}
