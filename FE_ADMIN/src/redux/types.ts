@@ -1,0 +1,11 @@
+const Types = {
+  SET_MODE : "SET_MODE",
+  SET_COLOR : "SET_COLOR",
+  GET_THEME: "GET_THEME",
+  LOGIN : "LOGIN",
+  LOGOUT: "LOGOUT",
+  ADD_TO_CART: 'ADD_TO_CART',
+  REMOVE_FROM_CART: 'REMOVE_FROM_CART',
+  CLEAR_CART: 'CLEAR_CART',
+}
+export default Types;
