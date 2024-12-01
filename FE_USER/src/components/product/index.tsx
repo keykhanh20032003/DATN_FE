@@ -387,7 +387,7 @@ const ItemProduct = (props: IIProduct) => {
                         <span className="pro-vendor">
                           Thương hiệu:{' '}
                           <strong>
-                            <Link to="">CRKing7</Link>
+                            <Link to="">Fashion Hub</Link>
                           </strong>
                         </span>
                       </div>

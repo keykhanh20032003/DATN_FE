@@ -118,6 +118,8 @@ const Layout = () => {
               <Route path={path.orders} element={<Order />} />
               <Route path={path.detailOrder} element={<DetailOrder />} />
               <Route path={path.editOrder} element={<EditOrder />} />
+              <Route path={path.counter} element={<Counter />} />
+              <Route path={path.createOrder} element={<CreateOrder />} />
               <Route path={path.analytics} element={<Analytics />} />
             </Routes>
           </Suspense>

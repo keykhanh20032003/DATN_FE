@@ -1,5 +1,5 @@
-import logo from './images/logo-online-shop.jpg';
-import logoDark from './images/logoDark.png';
+import logoLight from './images/logo-light.jpg';
+import logoDark from './images/logo-dark.jpg';
 import logoZaloPay from './images/LogoZaloPay.png';
 import LogoVnPay from './images/LogoVnPay.svg';
 import LogoBank from './images/LogoBank.svg';
@@ -9,7 +9,7 @@ import atmvisamaster from './images/atm_visa_master_jcb.svg';
 
 
 const Images = {
-  logo,
+  logoLight,
   logoDark,
   logoZaloPay,
   LogoVnPay,

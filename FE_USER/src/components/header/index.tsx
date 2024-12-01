@@ -125,8 +125,8 @@ const Header = () => {
                   <div className="wrap-logo" onClick={() => navigate('/')}>
                     <a href="#">
                       <img
-                        src={Images.logo}
-                        alt="CRKing7"
+                        src={Images.logoLight}
+                        alt="Fashion Hub"
                         className="img-responsive logoimg ls-is-cached lazyloaded"
                         style={{ width: '150px' }}
                       />
@@ -585,8 +585,8 @@ const Header = () => {
                         />
                       </g>
                     </svg>
-                    <a href="mailto:crking7dev@gmail.com" rel="nofollow">
-                      crking7dev@gmail.com
+                    <a href="mailto:fashionhub@gmail.com" rel="nofollow">
+                    fashionhub@gmail.com
                     </a>
                   </div>
                 </div>
@@ -608,8 +608,8 @@ const Header = () => {
                   <div className="wrap-logo" onClick={() => navigate('/')}>
                     <a href="#">
                       <img
-                        src={Images.logo}
-                        alt="CRKing7"
+                        src={Images.logoLight}
+                        alt="Fashion Hub"
                         className="img-responsive logoimg ls-is-cached lazyloaded"
                         style={{ width: '150px' }}
                       />

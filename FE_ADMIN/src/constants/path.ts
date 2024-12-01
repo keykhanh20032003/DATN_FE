@@ -41,6 +41,11 @@ const path = {
   addOrder: '/add-order',
   detailOrder: '/deail-order/:id',
   editOrder: '/edit-order', 
+  
+  //counter
+  counter: '/counter',
+  createOrder: '/counters/create-order',
+  
 
 } as const;
 

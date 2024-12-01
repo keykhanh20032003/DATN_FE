@@ -688,9 +688,9 @@ const CheckOut = () => {
                         <tr className="total-line total-line-gift">
                           <td colSpan={2}>
                             <p>
-                              Sau khi "Đặt hàng" thành công, CRKing7 sẽ kiểm tra sản phẩm và đóng gói ngay để giao hàng
-                              cho bạn. Trong quá trình kiểm tra sản phẩm nếu có phát sinh CRKing7 sẽ liên hệ trực tiếp
-                              với quý khách để xin xác nhận. CRKing7 Xin chân thành cảm ơn!
+                              Sau khi "Đặt hàng" thành công, Fashion Hub sẽ kiểm tra sản phẩm và đóng gói ngay để giao hàng
+                              cho bạn. Trong quá trình kiểm tra sản phẩm nếu có phát sinh Fashion Hub sẽ liên hệ trực tiếp
+                              với quý khách để xin xác nhận. Fashion Hub Xin chân thành cảm ơn!
                             </p>
                           </td>
                         </tr>
@@ -965,7 +965,7 @@ const CheckOut = () => {
                               <div className="radio-wrapper content-box-row content-box-row-secondary">
                                 <div className="blank-slate">
                                   Anh/Chị vui lòng chuyển khoản vào tài khoản sau đây: - Ngân hàng: BIDV (Ngân hàng TMCP
-                                  Đầu Tư & Phát Triển Việt Nam) - Tên tài khoản: NGUYEN KIM THANG - Số tài khoản:
+                                  Đầu Tư & Phát Triển Việt Nam) - Tên tài khoản: Dang Khanh - Số tài khoản:
                                   0966821574 - Chi nhánh Quang Minh * Nội Dung Chuyển Khoản: Online ck + SĐT đặt hàng.
                                   Chuyển khoản thành công Anh/Chị cho em xin ảnh chụp sao kê giao dịch và báo lại với
                                   nhân viên khi xác nhận ạ
@@ -1036,7 +1036,7 @@ const CheckOut = () => {
               </div>
             </div>
             <div className="hrv-coupons-popup-site-overlay" />
-            <div className="main-footer footer-powered-by">Powered by Kim Thăng</div>
+            <div className="main-footer footer-powered-by">Powered by Khanh Dang</div>
           </div>
         </div>
       </div>

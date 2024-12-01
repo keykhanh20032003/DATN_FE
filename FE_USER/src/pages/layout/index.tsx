@@ -4,13 +4,21 @@ import Footer from '~/components/footer';
 import Header from '~/components/header';
 import Topbar from '~/components/topbar';
 import path from '~/constants/path';
+import Login from '../user/login';
 import './styles.css';
+import Register from '../user/register';
 import Home from '../home';
+import Profile from '../profile';
+import Address from '../profile/address';
 import ProductView from '../product';
-import DetailProduct from '../detailProduct';
+import CollectionProduct from '../collectionProduct';
 import Cart from '../cart';
-
-
+import DetailProduct from '../detailProduct';
+import SearchProduct from '../searchProduct';
+import DetailArticle from '../detailArticle';
+import DetailOrder from '../profile/detailOrder';
+import Contact from '../contact';
+import Articles from '../articles';
 
 const Layout = () => {
   const ScrollToTopOnNavigate = () => {
@@ -59,11 +67,20 @@ const Layout = () => {
       <Header />
       <div className="mainWrapper--content">
         <Routes>
+          <Route path={path.login} element={<Login />} />
+          <Route path={path.register} element={<Register />} />
           <Route path={path.home} element={<Home />} />
+          <Route path={path.profile} element={<Profile />} />
+          <Route path={path.address} element={<Address />} />
           <Route path={path.product} element={<ProductView />} />
-          <Route path={path.product} element={<DetailProduct />} />
+          <Route path={path.collectionsProduct} element={<CollectionProduct />} />
           <Route path={path.cart} element={<Cart />} />
-
+          <Route path={path.detailProduct} element={<DetailProduct />} />
+          <Route path={path.searchProduct} element={<SearchProduct />} />
+          <Route path={path.detailArticle} element={<DetailArticle />} />
+          <Route path={path.detailOrder} element={<DetailOrder />} />
+          <Route path={path.contact} element={<Contact />} />
+          <Route path={path.article} element={<Articles />} />
         </Routes>
       </div>
       <Footer />

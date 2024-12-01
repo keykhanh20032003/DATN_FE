@@ -484,7 +484,7 @@ const ThankYou = () => {
                     <i className="icon icon-os-question" />
                     <span>
                       Cần hỗ trợ?{' '}
-                      <a href="crking7dev@gmail.com" onClick={handleBack}>
+                      <a href="fashionhub@gmail.com" onClick={handleBack}>
                         Liên hệ chúng tôi
                       </a>
                     </span>

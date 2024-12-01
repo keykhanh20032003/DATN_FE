@@ -704,7 +704,7 @@ const Home = () => {
               </div>
               <div className="sectionContentAboutus">
                 <p style={{ textAlign: 'justify' }}>
-                  𝐔𝐑𝐁𝐀𝐍𝐈𝐓𝐘 | 𝐍𝐄𝐖 𝐂𝐎𝐋𝐋𝐄𝐂𝐓𝐈𝐎𝐍 Nguồn cảm hứng dẫn lối các nhà thiết kế của CRKing7 để sáng tạo nên BST
+                  𝐔𝐑𝐁𝐀𝐍𝐈𝐓𝐘 | 𝐍𝐄𝐖 𝐂𝐎𝐋𝐋𝐄𝐂𝐓𝐈𝐎𝐍 Nguồn cảm hứng dẫn lối các nhà thiết kế của Fashion Hub để sáng tạo nên BST
                   URBANITY chính là vẻ đẹp hiện đại nhưng đầy tinh tế của những cô gái thành thị. Kết hợp những yếu tố
                   hiện đại pha trộn nét nữ tính mang lại cái chạm mềm mại và lãng mạn cho từng trang phục, cho dù đó là
                   nhờ những tone màu bay bổng, các hoạ tiết sáng tạo hay phụ kiện ăn ý, tạo ra phong cách của những cô

@@ -20,6 +20,13 @@ export interface Color {
   value: string;
   sizes: Size;
 }
+
+export interface ColorCreate {
+  id: number;
+  value: string;
+  sizes: Size[];
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -38,6 +45,7 @@ export interface Product {
   colors: Color;
   images: ProductImages[];
 }
+
 // const bb = {
 //   "id": 1,
 //                 "name": "test sản phẩm sale",

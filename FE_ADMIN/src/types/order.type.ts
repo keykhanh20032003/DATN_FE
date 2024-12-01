@@ -42,7 +42,8 @@ export interface OrderCreate {
   district: string;
   wards: string,
   note: string,
-  items: OrderItem[]
+  expireTime: number,
+  items: OrderItemCreate[]
 }
 
 export interface OrderItemCreate {

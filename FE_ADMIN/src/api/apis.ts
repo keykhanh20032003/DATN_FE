@@ -10,6 +10,7 @@ const Api = {
   updateUser: (id) => API_URL +`/api/user/update/${id}`,
   changePassword: (id) => API_URL + `/api/user/changePassword/${id}`,
   allUser: () => API_URL + `/api/admin/allUser`,
+  getUserAnonymous: () => API_URL + `/api/admin/user/getUserAnonymous`,
   //product
   getAllProduct: (params) => API_URL + `/api/admin/product?${new URLSearchParams (params)}`,
   createProduct : () => API_URL +`/api/admin/product/create`,
@@ -22,6 +23,9 @@ const Api = {
   getProductNoSale: (params) => API_URL + `/api/admin/product/productNoSale?${new URLSearchParams (params)}`,
   addProToSale: (id, productIds) => API_URL + `/api/admin/sale/add-product/${id}?productIds=${productIds}`,
   removeProSale: (id, productIds) => API_URL + `/api/admin/sale/remove-product/${id}?productIds=${productIds}`,
+  getColorByProductId : (id) => API_URL + `/api/color/${id}`,
+  getAllSize : () => API_URL + `/api/size`,
+  getAllColor : () => API_URL + `/api/color`,
   //xóa ảnh product
   deleteProImages: (id) => API_URL +`/api/admin/productImage/delete/${id}`,
   
@@ -82,5 +86,13 @@ const Api = {
   totalOrderNoProcess: () =>  API_URL + `/api/admin/order/totalOrderNoProcess`,
   findTopUser: () => API_URL + `/api/admin/user/findTopUser`,
   getOrderByMonth: (status) => API_URL +`/api/admin/order/getOrderByMonth?status=${status}`,
+  // thanh toán tại quầy
+  createInvoice: () => API_URL + `/api/admin/order/createInvoiceRedis`,
+  getAllInvoices: () => API_URL + `/api/admin/order/getAllInvoices`,
+  getInvoiceByCode: (code) => API_URL + `/api/admin/order/getInvoiceByCode?code=${code}`,
+  printBill: () => API_URL + `/api/admin/order/printBill`,
+  deleteInvoiceByCode: (code) => API_URL + `/api/admin/order/deleteInvoiceByCode?code=${code}`,
+  payInvoice: () => API_URL + `/api/admin/order/payInvoice`,
+  updateInvoice: () => API_URL + `/api/admin/order/updateInvoiceByCode`,
 }
 export default Api;

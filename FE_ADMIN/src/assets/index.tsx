@@ -1,5 +1,5 @@
-import logoLight from './images/logoLight.png';
-import logoDark from './images/logoDark.png';
+import logoLight from './images/logo-light.jpg';
+import logoDark from './images/logo-dark.jpg';
 import userNone from './images/userNone.jpg';
 import chooseImage from './images/chooseImage.svg';
 import iconX from './images/iconX.png';

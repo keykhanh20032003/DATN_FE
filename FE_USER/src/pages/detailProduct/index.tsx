@@ -354,7 +354,7 @@ const DetailProduct = () => {
                                 Thương hiệu:{' '}
                                 <strong>
                                   <a title="Show vendor" className="cursor-pointer">
-                                    CRKing7
+                                    Fashion Hub
                                   </a>
                                 </strong>
                               </span>
